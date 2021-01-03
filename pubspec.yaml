@@ -45,7 +45,12 @@ flutter:
   uses-material-design: true
   assets:
     - images/ray1.png
+    - images/ray2.png
+    - images/ray3.png
+    - images/ray4.png
+    - images/ray5.png
 
+    - topics.json
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
