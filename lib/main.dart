@@ -1,15 +1,14 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:gesturesfinalproject/alert_view_dialogue.dart';
 import 'package:gesturesfinalproject/article_model.dart';
+import 'package:flutter/services.dart';
+import 'package:gesturesfinalproject/constants.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,74 +16,123 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Raywenderlich E-Book'),
+      home: MyHomePage(title: Constants.appTitle),
     );
   }
 }
 
-// ignore: must_be_immutable
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
-  //List<Article> articlesList = [];
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var pageNumber = 0;
+  var changeColor = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Colors.grey,
+        backgroundColor: changeColor ? Colors.brown : Colors.grey,
         centerTitle: true,
         leading: Icon(Icons.menu),
       ),
       body: SingleChildScrollView(
         child: GestureDetector(
           onHorizontalDragEnd: (DragEndDetails details) {
-            print("horizontal drag");
+            setState(() {
+              if (details.primaryVelocity > 1) {
+                pageNumber <= 4 && pageNumber != 0
+                    ? pageNumber--
+                    : pageNumber = 4;
+              } else {
+                pageNumber >= 0 && pageNumber != 4
+                    ? pageNumber++
+                    : pageNumber = 0;
+              }
+            });
           },
           onVerticalDragEnd: (DragEndDetails details) {
-            print("vertical drag $details");
+            setState(() {
+              if (details.primaryVelocity > 1) {
+                pageNumber <= 4 && pageNumber != 0
+                    ? pageNumber--
+                    : pageNumber = 4;
+              } else {
+                pageNumber >= 0 && pageNumber != 4
+                    ? pageNumber++
+                    : pageNumber = 0;
+              }
+            });
           },
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: Image.asset(
-                  getTopicsList().image,
+          onDoubleTap: () {
+            setState(() {
+              changeColor = !changeColor;
+            });
+          },
+          onLongPress: () {
+            AlertViewDialogue().createAlertDialogue(context);
+          },
+          child: Container(
+            color: changeColor ? Colors.white : Colors.grey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  color: Colors.black,
+                  width: double.infinity,
+                  child: Image.asset(
+                    getTopicsList().image,
+                    fit: BoxFit.fill,
+                    height: 200,
+                    width: MediaQuery.of(context).size.width,
+                  ),
                 ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: Column(
-                  children: [
-                    //Header - Body --> Texts
-                    Center(
-                      child: Text(
-                        getTopicsList().topicHeader,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: Column(
+                    children: [
+                      Center(
+                        child: Text(
+                          getTopicsList().topicHeader,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      getTopicsList().topicBody,
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        getTopicsList().topicBody,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
+        ),
+      ),
+      bottomNavigationBar: new Container(
+        color: changeColor ? Colors.white : Colors.grey,
+        height: 40.0,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "${pageNumber + 1}",
+              style: TextStyle(color: Colors.black, fontSize: 18),
+            )
+          ],
         ),
       ),
     );
@@ -92,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   ArticleModel getTopicsList() {
     final items = ArticleModel.getData();
-    final loc = items[4];
-    return loc;
+    final location = items[pageNumber];
+    return location;
   }
 }

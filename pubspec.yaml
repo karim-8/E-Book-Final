@@ -49,8 +49,7 @@ flutter:
     - images/ray3.png
     - images/ray4.png
     - images/ray5.png
-
-    - topics.json
+    - images/raylogo.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
