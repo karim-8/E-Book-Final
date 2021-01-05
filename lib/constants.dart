@@ -16,12 +16,7 @@ class Constants {
       " you can create and configure simulators from the command line as well? In this tutorial, you’ll learn:"
       "What a simulator is"
       "Insights into useful simulator options"
-      "To create and configure simulators from the command line"
-      "To stream and capture logs using the command line"
-      "To create a Bash script to automate launching the app on a simulator in different locales."
-      "Getting Started"
-      "Download the project by clicking the Download Materials button at the top or bottom of this page."
-      " Open the RayWonders project. Build and run.  ";
+      "To create and configure simulators from the command line";
   static var xcodeSimulatorImage = "images/ray1.png";
   static var pixelHeader = "Pixel Accurate";
   static var pixelBody =

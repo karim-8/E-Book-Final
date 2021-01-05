@@ -43,82 +43,87 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         leading: Icon(Icons.menu),
       ),
-      body: SingleChildScrollView(
-        child: GestureDetector(
-          onHorizontalDragEnd: (DragEndDetails details) {
-            setState(() {
-              if (details.primaryVelocity > 1) {
-                pageNumber <= 4 && pageNumber != 0
-                    ? pageNumber--
-                    : pageNumber = 4;
-              } else {
-                pageNumber >= 0 && pageNumber != 4
-                    ? pageNumber++
-                    : pageNumber = 0;
-              }
-            });
-          },
-          onVerticalDragEnd: (DragEndDetails details) {
-            setState(() {
-              if (details.primaryVelocity > 1) {
-                pageNumber <= 4 && pageNumber != 0
-                    ? pageNumber--
-                    : pageNumber = 4;
-              } else {
-                pageNumber >= 0 && pageNumber != 4
-                    ? pageNumber++
-                    : pageNumber = 0;
-              }
-            });
-          },
-          onDoubleTap: () {
-            setState(() {
-              changeColor = !changeColor;
-            });
-          },
-          onLongPress: () {
-            AlertViewDialogue().createAlertDialogue(context);
-          },
-          child: Container(
-            color: changeColor ? Colors.white : Colors.grey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  color: Colors.black,
-                  width: double.infinity,
-                  child: Image.asset(
-                    getTopicsList().image,
-                    fit: BoxFit.fill,
-                    height: 200,
-                    width: MediaQuery.of(context).size.width,
+      body: GestureDetector(
+        onHorizontalDragEnd: (DragEndDetails details) {
+          setState(() {
+            if (details.primaryVelocity > 1) {
+              pageNumber <= 4 && pageNumber != 0
+                  ? pageNumber--
+                  : pageNumber = 4;
+            } else {
+              pageNumber >= 0 && pageNumber != 4
+                  ? pageNumber++
+                  : pageNumber = 0;
+            }
+          });
+        },
+        onVerticalDragEnd: (DragEndDetails details) {
+          setState(() {
+            if (details.primaryVelocity > 1) {
+              pageNumber <= 4 && pageNumber != 0
+                  ? pageNumber--
+                  : pageNumber = 4;
+            } else {
+              pageNumber >= 0 && pageNumber != 4
+                  ? pageNumber++
+                  : pageNumber = 0;
+            }
+          });
+        },
+        onDoubleTap: () {
+          setState(() {
+            changeColor = !changeColor;
+          });
+        },
+        onLongPress: () {
+          AlertViewDialogue().createAlertDialogue(context);
+        },
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Container(
+              color: changeColor ? Colors.white : Colors.grey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    color: Colors.black,
+                    width: double.infinity,
+                    child: Image.asset(
+                      getTopicsList().image,
+                      fit: BoxFit.fill,
+                      height: 200,
+                      width: MediaQuery.of(context).size.width,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  child: Column(
-                    children: [
-                      Center(
-                        child: Text(
-                          getTopicsList().topicHeader,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
+                    child: Column(
+                      children: [
+                        Center(
+                          child: Text(
+                            getTopicsList().topicHeader,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18),
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        getTopicsList().topicBody,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          child: Text(
+                            getTopicsList().topicBody,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
       bottomNavigationBar: new Container(
