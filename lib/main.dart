@@ -99,6 +99,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               GestureDetector(
+                onPanStart: (DragStartDetails details) {
+                  _points.clear();
+                },
                 //Testing purpose
                 onPanUpdate: (DragUpdateDetails details) {
                   setState(() {
@@ -109,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   });
                 },
 
-                //onPanEnd: (DragEndDetails details) => _points,
+                onPanEnd: (DragEndDetails details) => _points,
 
 //                onHorizontalDragEnd: (DragEndDetails details) {
 //                  setState(() {
