@@ -40,10 +40,12 @@ class AlertViewDialogue {
           actions: <Widget>[
             GestureDetector(
               child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      color: Colors.white70),
-                  child: Text(Constants.copyButton)),
+                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: Text(
+                    Constants.copyButton,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.blue),
+                  )),
               onTap: () async {
                 Clipboard.setData(new ClipboardData(text: Constants.rayUrl));
                 Navigator.of(dialogContext).pop(); // Dismiss alert dialog
