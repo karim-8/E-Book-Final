@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Matrix4.diagonal3(Vector3(_scale, _scale, _scale)),
                       child: Container(
                         color: Colors.black,
-                        width: double.infinity,
+                        // width: double.infinity,
                         child: Image.asset(
                           getTopicsList().image,
                           fit: BoxFit.fill,
@@ -195,11 +195,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image.asset(
-                              "images/up-arrow.png",
-                              fit: BoxFit.fill,
-                              height: 40,
-                              width: 40,
+                            Flexible(
+                              child: Image.asset(
+                                "images/up-arrow.png",
+                                fit: BoxFit.fill,
+                                height: 40,
+                                width: 40,
+                              ),
                             ),
                           ],
                         ),
@@ -207,28 +209,34 @@ class _MyHomePageState extends State<MyHomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Image.asset(
-                              "images/left-arrow.png",
-                              fit: BoxFit.fill,
-                              height: 40,
-                              width: 40,
+                            Flexible(
+                              child: Image.asset(
+                                "images/left-arrow.png",
+                                fit: BoxFit.fill,
+                                height: 40,
+                                width: 40,
+                              ),
                             ),
-                            Image.asset(
-                              "images/right-arrow.png",
-                              fit: BoxFit.fill,
-                              height: 40,
-                              width: 40,
+                            Flexible(
+                              child: Image.asset(
+                                "images/right-arrow.png",
+                                fit: BoxFit.fill,
+                                height: 40,
+                                width: 40,
+                              ),
                             ),
                           ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image.asset(
-                              "images/down-arrow.png",
-                              fit: BoxFit.fill,
-                              height: 40,
-                              width: 40,
+                            Flexible(
+                              child: Image.asset(
+                                "images/down-arrow.png",
+                                fit: BoxFit.fill,
+                                height: 40,
+                                width: 40,
+                              ),
                             ),
                           ],
                         ),
