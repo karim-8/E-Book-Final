@@ -57,4 +57,6 @@ class Constants {
       "Choose Simulator from the drop-down."
       "In the location prompt, select Demo as the simulator.";
   static var sharingLocationImage = "images/ray5.png";
+  static var visit = "Vist website";
+  static var mainUrl = "https://www.raywenderlich.com/whats-new";
 }

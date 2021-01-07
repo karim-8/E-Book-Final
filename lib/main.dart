@@ -1,9 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gesturesfinalproject/alert_view_dialogue.dart';
 import 'package:gesturesfinalproject/article_model.dart';
 import 'package:flutter/services.dart';
 import 'package:gesturesfinalproject/constants.dart';
-import 'package:gesturesfinalproject/drawing.dart';
+import 'package:gesturesfinalproject/drawing_shape.dart';
 import 'package:vector_math/vector_math_64.dart' show Vector3;
 
 void main() {
@@ -99,6 +100,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 GestureDetector(
+                  onDoubleTap: () {
+                    setState(() {
+                      _changeColor = !_changeColor;
+                    });
+                  },
                   onPanStart: (DragStartDetails details) {
                     _points.clear();
                   },
@@ -112,48 +118,48 @@ class _MyHomePageState extends State<MyHomePage> {
                     });
                   },
 
-                  onPanEnd: (DragEndDetails details) {
-                    _points;
-                    print("******$_points");
-                  },
-                  onDoubleTap: () {
-                    setState(() {
-                      _changeColor = !_changeColor;
-                    });
-                  },
+                  onPanEnd: (DragEndDetails details) => _points.add(null),
+
                   onLongPress: () {
                     AlertViewDialogue().createAlertDialogue(context);
                   },
                   child: CustomPaint(
-                    painter: new Signature(points: _points),
+                    painter: new DrawingShape(points: _points),
                     size: Size.infinite,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 10),
-                      child: Column(
-                        children: [
-                          Center(
-                            child: Text(
-                              getTopicsList().topicHeader,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
+                      child: Container(
+                        child: Column(
+                          children: [
+                            Center(
+                              child: Text(
+                                getTopicsList().topicHeader,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 18),
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Container(
-                            child: Text(
-                              getTopicsList().topicBody,
-                              style: TextStyle(fontSize: 16),
+                            SizedBox(
+                              height: 5,
                             ),
-                          ),
-                        ],
+                            Container(
+                              child: Text(
+                                getTopicsList().topicBody,
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
                 GestureDetector(
+                  onDoubleTap: () {
+                    setState(() {
+                      _changeColor = !_changeColor;
+                    });
+                  },
                   onHorizontalDragEnd: (DragEndDetails details) {
                     setState(() {
                       if (details.primaryVelocity > 1) {
@@ -182,15 +188,50 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   child: Container(
                     color: _changeColor ? Colors.white : Colors.grey,
-                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 50),
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 2,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    height: MediaQuery.of(context).size.height,
+                    child: Column(
                       children: [
-                        Icon(Icons.arrow_back_ios),
-                        Icon(Icons.arrow_forward_ios),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              "images/up-arrow.png",
+                              fit: BoxFit.fill,
+                              height: 40,
+                              width: 40,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Image.asset(
+                              "images/left-arrow.png",
+                              fit: BoxFit.fill,
+                              height: 40,
+                              width: 40,
+                            ),
+                            Image.asset(
+                              "images/right-arrow.png",
+                              fit: BoxFit.fill,
+                              height: 40,
+                              width: 40,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              "images/down-arrow.png",
+                              fit: BoxFit.fill,
+                              height: 40,
+                              width: 40,
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -214,9 +255,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         floatingActionButton: new FloatingActionButton(
-          backgroundColor: Colors.brown,
           child: new Icon(Icons.clear),
           onPressed: () => _points.clear(),
+          backgroundColor: Colors.brown,
         ));
   }
 
