@@ -1,4 +1,4 @@
-import 'package:gesturesfinalproject/constants.dart';
+import 'package:gesturesfinalproject/utilis/constants.dart';
 
 class ArticleModel {
   String topicHeader;

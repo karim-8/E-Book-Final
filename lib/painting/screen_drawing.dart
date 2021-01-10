@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class DrawingShape extends CustomPainter {
+class ScreenDrawing extends CustomPainter {
   List<Offset> points;
 
-  DrawingShape({this.points});
+  ScreenDrawing({this.points});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -23,7 +23,7 @@ class DrawingShape extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(DrawingShape oldDelegate) {
+  bool shouldRepaint(ScreenDrawing oldDelegate) {
     return true;
   }
 }

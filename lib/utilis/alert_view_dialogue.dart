@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gesturesfinalproject/constants.dart';
+import 'package:gesturesfinalproject/utilis/constants.dart';
 
 class AlertViewDialogue {
   createAlertDialogue(BuildContext context) {
