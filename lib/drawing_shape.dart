@@ -12,7 +12,8 @@ class DrawingShape extends CustomPainter {
       ..color = Colors.blue
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.bevel
-      ..strokeWidth = 30.0;
+      ..isAntiAlias = true
+      ..strokeWidth = 25.0;
 
     for (int i = 0; i < points.length - 1; i++) {
       if (points[i] != null && points[i + 1] != null) {
@@ -22,5 +23,7 @@ class DrawingShape extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(DrawingShape oldDelegate) => oldDelegate.points != points;
+  bool shouldRepaint(DrawingShape oldDelegate) {
+    return true;
+  }
 }
