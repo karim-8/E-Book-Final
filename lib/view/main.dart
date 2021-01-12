@@ -157,19 +157,22 @@ class _MyHomePageState extends State<MyHomePage> {
         _scale = 1.0;
         setState(() {});
       },
-      child: RotatedBox(
-        quarterTurns: _rotate,
-        child: Transform(
-          alignment: FractionalOffset.center,
-          transform: Matrix4.diagonal3(Vector3(_scale, _scale, _scale)),
-          child: Container(
-            height: 200,
-            color: Colors.black,
-            child: Image.asset(
-              getTopicsList().image,
-              fit: BoxFit.fill,
+      child: Container(
+        height: 200,
+        child: RotatedBox(
+          quarterTurns: _rotate,
+          child: Transform(
+            alignment: FractionalOffset.center,
+            transform: Matrix4.diagonal3(Vector3(_scale, _scale, _scale)),
+            child: Container(
               height: 200,
-              width: MediaQuery.of(context).size.width,
+              color: Colors.black,
+              child: Image.asset(
+                getTopicsList().image,
+                fit: BoxFit.fill,
+                height: 200,
+                width: MediaQuery.of(context).size.width,
+              ),
             ),
           ),
         ),
