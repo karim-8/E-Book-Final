@@ -163,6 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
           alignment: FractionalOffset.center,
           transform: Matrix4.diagonal3(Vector3(_scale, _scale, _scale)),
           child: Container(
+            height: 200,
             color: Colors.black,
             child: Image.asset(
               getTopicsList().image,
@@ -233,64 +234,66 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget changePageView() {
-    return GestureDetector(
-      onDoubleTap: () {
-        setState(() {
-          _changeColor = !_changeColor;
-        });
-      },
-      onHorizontalDragEnd: (DragEndDetails details) {
-        setState(() {
-          if (details.primaryVelocity > 1) {
-            _pageNumber <= 4 && _pageNumber != 0
-                ? _pageNumber--
-                : _pageNumber = 4;
-          } else {
-            _pageNumber >= 0 && _pageNumber != 4
-                ? _pageNumber++
-                : _pageNumber = 0;
-          }
-        });
-      },
-      onVerticalDragEnd: (DragEndDetails details) {
-        setState(() {
-          if (details.primaryVelocity > 1) {
-            _pageNumber <= 4 && _pageNumber != 0
-                ? _pageNumber--
-                : _pageNumber = 4;
-          } else {
-            _pageNumber >= 0 && _pageNumber != 4
-                ? _pageNumber++
-                : _pageNumber = 0;
-          }
-        });
-      },
-      child: Container(
-        height: MediaQuery.of(context).size.height,
-        color: _changeColor ? Colors.white : Colors.grey,
-        child: Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Expanded(
+      flex: 2,
+      child: GestureDetector(
+          onDoubleTap: () {
+            setState(() {
+              _changeColor = !_changeColor;
+            });
+          },
+          onHorizontalDragEnd: (DragEndDetails details) {
+            setState(() {
+              if (details.primaryVelocity > 1) {
+                _pageNumber <= 4 && _pageNumber != 0
+                    ? _pageNumber--
+                    : _pageNumber = 4;
+              } else {
+                _pageNumber >= 0 && _pageNumber != 4
+                    ? _pageNumber++
+                    : _pageNumber = 0;
+              }
+            });
+          },
+          onVerticalDragEnd: (DragEndDetails details) {
+            setState(() {
+              if (details.primaryVelocity > 1) {
+                _pageNumber <= 4 && _pageNumber != 0
+                    ? _pageNumber--
+                    : _pageNumber = 4;
+              } else {
+                _pageNumber >= 0 && _pageNumber != 4
+                    ? _pageNumber++
+                    : _pageNumber = 0;
+              }
+            });
+          },
+          child: Container(
+            //height: 200,
+            color: _changeColor ? Colors.white : Colors.grey,
+            child: Column(
               children: [
-                Image.asset(
-                  "images/previous-arrow.png",
-                  fit: BoxFit.fill,
-                  height: 50,
-                  width: 40,
-                ),
-                Image.asset(
-                  "images/forward-arrow.png",
-                  fit: BoxFit.fill,
-                  height: 50,
-                  width: 50,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Image.asset(
+                      "images/previous-arrow.png",
+                      fit: BoxFit.fill,
+                      height: 50,
+                      width: 40,
+                    ),
+                    Image.asset(
+                      "images/forward-arrow.png",
+                      fit: BoxFit.fill,
+                      height: 50,
+                      width: 50,
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
-      ),
+          )),
     );
   }
 
