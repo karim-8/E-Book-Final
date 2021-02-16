@@ -182,13 +182,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget bookTopic() {
     return GestureDetector(
+      onTap: () {
+        AlertViewDialogue().createAlertDialogue(context, false);
+      },
+
       onDoubleTap: () {
         setState(() {
           _changeColor = !_changeColor;
         });
       },
       onLongPress: () {
-        AlertViewDialogue().createAlertDialogue(context);
+        AlertViewDialogue().createAlertDialogue(context, true);
       },
       onPanStart: (DragStartDetails details) {
         _points.clear();

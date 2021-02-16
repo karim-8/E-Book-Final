@@ -45,7 +45,7 @@ class Constants {
       'https://www.raywenderlich.com/16971076-xcode-simulator-app-advanced#toc-anchor-002';
   static var rayDomain = 'raywenderlich.com';
   static var rayLogo = 'images/raylogo.png';
-  static var appTitle = 'Raywenderlich E-Book';
+  static var appTitle = 'raywenderlich E-Book';
   static var snackBarText = 'URL Copied to Clipboard';
   static var xcodeSimulatorHeader =
       "The Xcode Simulator is one of the tools used most widely by developers:";
