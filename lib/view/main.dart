@@ -39,10 +39,10 @@ DEALINGS IN THE SOFTWARE.
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:gesturesfinalproject/utilis/alert_view_dialogue.dart';
 import 'package:gesturesfinalproject/models/article_model.dart';
-import 'package:gesturesfinalproject/utilis/constants.dart';
 import 'package:gesturesfinalproject/painting/screen_drawing.dart';
+import 'package:gesturesfinalproject/utilities/alert_view_dialogue.dart';
+import 'package:gesturesfinalproject/utilities/constants.dart';
 import 'package:vector_math/vector_math_64.dart' show Vector3;
 
 void main() {
