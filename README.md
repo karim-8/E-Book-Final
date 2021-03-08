@@ -1,4 +1,4 @@
-# gesturesfinalproject
+# ebookfinalproject
 
 A new Flutter application.
 
