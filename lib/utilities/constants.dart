@@ -98,4 +98,6 @@ class Constants {
   static var sharingLocationImage = "images/ray5.png";
   static var visit = "Vist website";
   static var mainUrl = "https://www.raywenderlich.com/whats-new";
+  static var copyMessage = "Article URL Copied to Clipboard";
+  static var visitMessage = "raywenderlich URL Copied to Clipboard";
 }
