@@ -112,13 +112,17 @@ class AlertViewDialogue {
                                     instance.onTap = () {
                                       Clipboard.setData(new ClipboardData(
                                           text: Constants.rayUrl));
-                                      showToastMessage(context);
+                                      showToastMessage(context,Constants.copyMessage);
                                       print('Copy Button Tapped');
                                     };
                                   },
                                 )
                               },
                               child: Container(
+                                width: 70,height: 30,
+                                decoration: BoxDecoration(
+                                  border: Border.all(width: 1,color: Colors.blue)
+                                ),
                                   child: Center(
                                 child: Text(
                                   Constants.copyButton,
@@ -142,14 +146,17 @@ class AlertViewDialogue {
                                     instance.onTap = () {
                                       Clipboard.setData(new ClipboardData(
                                           text: Constants.mainUrl));
-                                      showToastMessage(context);
+                                      showToastMessage(context,Constants.visitMessage);
                                       print('visit Site Tapped');
                                     };
                                   },
                                 )
                               },
                               child: Container(
-                                  height: 50,
+                                  width: 100,height: 30,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(width: 1,color: Colors.blue)
+                                  ),
                                   child: Center(
                                     child: Text(
                                       Constants.visit,
@@ -191,12 +198,10 @@ class AlertViewDialogue {
     );
   }
 
-  showToastMessage(BuildContext context) async {
-    ScaffoldMessengerState scaffoldMessenger = ScaffoldMessenger.of(context);
-    ScaffoldFeatureController controller = scaffoldMessenger.showSnackBar(
-      const SnackBar(content: Text('URL Copied to Clipboard')),
-    );
-    await controller.closed;
+  showToastMessage(BuildContext context,String message) async {
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text(message),duration:Duration(seconds: 2),
+    ));
   }
 }
 

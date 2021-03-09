@@ -100,18 +100,20 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-        body: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            color: _changeColor ? Colors.white : Colors.grey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                coverImageView(),
-                bookTopic(),
-                changePageView(),
-              ],
+        body: Builder(
+          builder: (contexts)=> SingleChildScrollView(
+            physics: NeverScrollableScrollPhysics(),
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              color: _changeColor ? Colors.white : Colors.grey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  coverImageView(),
+                  bookTopic(contexts),
+                  changePageView(),
+                ],
+              ),
             ),
           ),
         ),
@@ -180,10 +182,10 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget bookTopic() {
+  Widget bookTopic(BuildContext buildContext) {
     return GestureDetector(
       onTap: () {
-        AlertViewDialogue().createAlertDialogue(context, false);
+        AlertViewDialogue().createAlertDialogue(buildContext, false);
       },
 
       onDoubleTap: () {
@@ -192,7 +194,7 @@ class _MyHomePageState extends State<MyHomePage> {
         });
       },
       onLongPress: () {
-        AlertViewDialogue().createAlertDialogue(context, true);
+        AlertViewDialogue().createAlertDialogue(buildContext, true);
       },
       onPanStart: (DragStartDetails details) {
         _points.clear();
