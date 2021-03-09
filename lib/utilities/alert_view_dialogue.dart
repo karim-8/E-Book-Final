@@ -52,26 +52,7 @@ class AlertViewDialogue {
           title: !isLongPressed
               ? Column(
                   children: [
-                    Row(
-                      children: [
-                        Container(
-                          child: Image.asset(
-                            Constants.rayLogo,
-                            width: 25,
-                            height: 25,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          Constants.rayDomain,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
-                        ),
-                      ],
-                    ),
+                    headerView(),
                     SizedBox(
                       height: 10,
                     ),
@@ -79,122 +60,157 @@ class AlertViewDialogue {
                       Constants.articleUrl,
                       style: TextStyle(color: Colors.blue, fontSize: 12),
                     ),
-                    RawGestureDetector(
-                      gestures: {
-                        AllowMultipleGestureRecognizer:
-                            GestureRecognizerFactoryWithHandlers<
-                                AllowMultipleGestureRecognizer>(
-                          () => AllowMultipleGestureRecognizer(), //constructor
-                          (AllowMultipleGestureRecognizer instance) {
-                            //initializer
-                            instance.onTap = () {
-                              print("Row Tapped");
-                              Navigator.of(dialogContext).pop();
-                            };
-                          },
-                        )
-                      },
-                      child: Container(
-                        height: 50,
-                        color: Colors.transparent,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            RawGestureDetector(
-                              gestures: {
-                                AllowMultipleGestureRecognizer:
-                                    GestureRecognizerFactoryWithHandlers<
-                                        AllowMultipleGestureRecognizer>(
-                                  () =>
-                                      AllowMultipleGestureRecognizer(), //constructor
-                                  (AllowMultipleGestureRecognizer instance) {
-                                    //initializer
-                                    instance.onTap = () {
-                                      Clipboard.setData(new ClipboardData(
-                                          text: Constants.rayUrl));
-                                      showToastMessage(context,Constants.copyMessage);
-                                      print('Copy Button Tapped');
-                                    };
-                                  },
-                                )
-                              },
-                              child: Container(
-                                width: 70,height: 30,
-                                decoration: BoxDecoration(
-                                  border: Border.all(width: 1,color: Colors.blue)
-                                ),
-                                  child: Center(
-                                child: Text(
-                                  Constants.copyButton,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.blue,
-                                      fontSize: 12),
-                                ),
-                              )),
-                            ),
-                            RawGestureDetector(
-                              behavior: HitTestBehavior.deferToChild,
-                              gestures: {
-                                AllowMultipleGestureRecognizer:
-                                    GestureRecognizerFactoryWithHandlers<
-                                        AllowMultipleGestureRecognizer>(
-                                  () =>
-                                      AllowMultipleGestureRecognizer(), //constructor
-                                  (AllowMultipleGestureRecognizer instance) {
-                                    //initializer
-                                    instance.onTap = () {
-                                      Clipboard.setData(new ClipboardData(
-                                          text: Constants.mainUrl));
-                                      showToastMessage(context,Constants.visitMessage);
-                                      print('visit Site Tapped');
-                                    };
-                                  },
-                                )
-                              },
-                              child: Container(
-                                  width: 100,height: 30,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(width: 1,color: Colors.blue)
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      Constants.visit,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.blue,
-                                          fontSize: 12),
-                                    ),
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    itemsRowView(context,dialogContext),
                   ],
                 )
-              : Row(
-                  children: [
-                    Container(
-                      child: Image.asset(
-                        Constants.rayLogo,
-                        width: 25,
-                        height: 25,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      Constants.rayDomain,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                    ),
-                  ],
-                ),
+              : singleAlertView(),
         );
       },
+    );
+  }
+
+  Widget headerView() {
+    return Row(
+      children: [
+        Container(
+          child: Image.asset(
+            Constants.rayLogo,
+            width: 25,
+            height: 25,
+            fit: BoxFit.contain,
+          ),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        Text(
+          Constants.rayDomain,
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 16),
+        ),
+      ],
+    );
+  }
+  Widget itemsRowView(BuildContext context, BuildContext dialogContext){
+    return RawGestureDetector(
+      gestures: {
+        AllowMultipleGestureRecognizer:
+        GestureRecognizerFactoryWithHandlers<
+            AllowMultipleGestureRecognizer>(
+              () => AllowMultipleGestureRecognizer(), //constructor
+              (AllowMultipleGestureRecognizer instance) {
+            //initializer
+            instance.onTap = () {
+              print("Row Tapped");
+              Navigator.of(dialogContext).pop();
+            };
+          },
+        )
+      },
+      child: Container(
+        height: 50,
+        color: Colors.transparent,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            copyButtonView(context),
+            visitButtonView(context),
+          ],
+        ),
+      ),
+    );
+  }
+  Widget copyButtonView(BuildContext context) {
+    return RawGestureDetector(
+      gestures: {
+        AllowMultipleGestureRecognizer:
+        GestureRecognizerFactoryWithHandlers<
+            AllowMultipleGestureRecognizer>(
+              () =>
+              AllowMultipleGestureRecognizer(), //constructor
+              (AllowMultipleGestureRecognizer instance) {
+            //initializer
+            instance.onTap = () {
+              Clipboard.setData(new ClipboardData(
+                  text: Constants.rayUrl));
+              showToastMessage(context,Constants.copyMessage);
+              print('Copy Button Tapped');
+            };
+          },
+        )
+      },
+      child: Container(
+          width: 70,height: 30,
+          decoration: BoxDecoration(
+              border: Border.all(width: 1,color: Colors.blue)
+          ),
+          child: Center(
+            child: Text(
+              Constants.copyButton,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                  fontSize: 12),
+            ),
+          )),
+    );
+  }
+  Widget visitButtonView(BuildContext context) {
+    return RawGestureDetector(
+      behavior: HitTestBehavior.deferToChild,
+      gestures: {
+        AllowMultipleGestureRecognizer:
+        GestureRecognizerFactoryWithHandlers<
+            AllowMultipleGestureRecognizer>(
+              () =>
+              AllowMultipleGestureRecognizer(), //constructor
+              (AllowMultipleGestureRecognizer instance) {
+            //initializer
+            instance.onTap = () {
+              Clipboard.setData(new ClipboardData(
+                  text: Constants.mainUrl));
+              showToastMessage(context,Constants.visitMessage);
+              print('visit Site Tapped');
+            };
+          },
+        )
+      },
+      child: Container(
+          width: 100,height: 30,
+          decoration: BoxDecoration(
+              border: Border.all(width: 1,color: Colors.blue)
+          ),
+          child: Center(
+            child: Text(
+              Constants.visit,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                  fontSize: 12),
+            ),
+          )),
+    ) ;
+  }
+  Widget singleAlertView() {
+    return Row(
+      children: [
+        Container(
+          child: Image.asset(
+            Constants.rayLogo,
+            width: 25,
+            height: 25,
+            fit: BoxFit.contain,
+          ),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        Text(
+          Constants.rayDomain,
+          style:
+          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        ),
+      ],
     );
   }
 
